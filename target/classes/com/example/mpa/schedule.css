@@ -1,0 +1,48 @@
+#schBG{
+    -fx-background-color: #050e2d;
+}
+
+#heading{
+    -fx-text-fill: #C0C0C0;
+}
+
+.labels{
+    -fx-text-fill: #C0C0C0;
+    -fx-font-family: "OCR A Extended";
+    -fx-font-size: 20px;
+}
+
+.text-field{
+    -fx-background-color: transparent;
+    -fx-border-color: #bba137;
+}
+
+.buttons {
+    -fx-font-family: "OCR A Extended", Regular;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D9DCDF;
+    -fx-border-color: #bba137;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+}
+
+.text-area {
+    -fx-control-inner-background: #0A143C;
+    -fx-border-color: #1A2238;
+    -fx-background-color: #0A143C;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+
+    -fx-font-family: "OCR A Extended";
+    -fx-font-size: 20px;
+}
+
+.text-area .content {
+    -fx-background-color: #0A143C;
+    -fx-background-radius: 20px;
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+}

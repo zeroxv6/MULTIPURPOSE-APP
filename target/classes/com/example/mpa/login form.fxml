@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mpa.loginController">
+   <children>
+      <ImageView fitHeight="366.0" fitWidth="623.0" layoutX="-18.0" layoutY="-6.0" pickOnBounds="true">
+         <image>
+            <Image url="@loginBg.jpg" />
+         </image>
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="1.0" green="0.8617647290229797" blue="0.5299999713897705" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Label layoutX="234.0" layoutY="19.0" text="REGISTER/LOGIN " textFill="WHITE">
+         <font>
+            <Font name="OCR A Extended" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <Label fx:id="logo1" layoutX="220.0" layoutY="36.0" prefHeight="59.0" prefWidth="106.0" styleClass="logo" stylesheets="@login.css" text="prod" textFill="#00ffb2">
+         <font>
+            <Font name="Modern No. 20" size="54.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <Label fx:id="logo" layoutX="316.0" layoutY="28.0" prefHeight="59.0" prefWidth="70.0" styleClass="logo" text="IP" textFill="#00ffb2">
+         <font>
+            <Font name="Jokerman" size="47.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <Label layoutX="351.0" layoutY="55.0" prefHeight="39.0" prefWidth="34.0" styleClass="logo" text="v4" textFill="#00ffb27d">
+         <font>
+            <Font name="Modern No. 20" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <TextField fx:id="username" alignment="CENTER" layoutX="202.0" layoutY="116.0" prefHeight="47.0" prefWidth="210.0" styleClass="input" stylesheets="@login.css">
+         <font>
+            <Font name="OCR A Extended" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="email" alignment="CENTER" layoutX="202.0" layoutY="243.0" prefHeight="47.0" prefWidth="210.0" styleClass="input" stylesheets="@login.css">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <Label layoutX="422.0" layoutY="132.0" text="(must be unique)" textFill="#9e8f8f">
+         <font>
+            <Font name="OCR A Extended" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label layoutX="59.0" layoutY="128.0" text="USERNAME :">
+         <font>
+            <Font name="OCR A Extended" size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label fx:id="emailL" layoutX="59.0" layoutY="251.0" prefHeight="30.0" prefWidth="134.0" text="EMAIL    :">
+         <font>
+            <Font name="OCR A Extended" size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label fx:id="pswdL" layoutX="59.0" layoutY="187.0" prefHeight="30.0" prefWidth="134.0" text="PASSWORD :">
+         <font>
+            <Font name="OCR A Extended" size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Button fx:id="btn" defaultButton="true" layoutX="255.0" layoutY="304.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="89.0" text="PROCEED">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <PasswordField fx:id="password" alignment="CENTER" layoutX="202.0" layoutY="179.0" prefHeight="47.0" prefWidth="210.0" styleClass="input">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></PasswordField>
+   </children>
+</AnchorPane>

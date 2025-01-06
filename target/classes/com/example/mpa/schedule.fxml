@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="schBG" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="600.0" stylesheets="@schedule.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mpa.scheduleController">
+   <children>
+      <Label fx:id="heading" layoutX="164.0" layoutY="8.0" prefHeight="31.0" prefWidth="270.0" text="SCHEDULE SET-UP">
+         <font>
+            <Font name="OCR A Extended" size="29.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="31.0" layoutY="101.0" styleClass="labels" stylesheets="@schedule.css" text="SCHEDULE TITLE" />
+      <TextField layoutX="221.0" layoutY="96.0" prefHeight="34.0" prefWidth="354.0" promptText="Enter the Title" />
+      <Label layoutX="31.0" layoutY="175.0" styleClass="labels" text="TIME RANGE" />
+      <Label layoutX="31.0" layoutY="251.0" styleClass="labels" text="TOPICS TO BE COVERED (seperated by commas): " />
+      <TextArea layoutX="33.0" layoutY="318.0" prefHeight="312.0" prefWidth="532.0" wrapText="true" />
+      <TextField layoutX="164.0" layoutY="170.0" prefHeight="34.0" prefWidth="122.0" />
+      <TextField layoutX="373.0" layoutY="171.0" prefHeight="34.0" prefWidth="122.0" />
+      <Label layoutX="335.0" layoutY="177.0" styleClass="labels" text="TO" />
+   </children>
+</AnchorPane>

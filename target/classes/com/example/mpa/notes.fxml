@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="bg" stylesheets="@notes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mpa.notesController">
+   <children>
+      <DatePicker fx:id="searchNotesByDate" layoutX="134.0" layoutY="24.0" prefHeight="28.0" prefWidth="42.0" />
+      <AnchorPane layoutY="93.0" prefHeight="407.0" prefWidth="234.0" stylesheets="@notes.css">
+         <children>
+            <ScrollPane layoutX="5.0" layoutY="3.0" prefHeight="396.0" prefWidth="228.0" styleClass="paneClr" stylesheets="@notes.css">
+               <content>
+                  <VBox fx:id="savedShow" prefHeight="394.0" prefWidth="225.0" styleClass="paneClr" stylesheets="@notes.css" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="249.0" layoutY="94.0" prefHeight="396.0" prefWidth="443.0" stylesheets="@notes.css">
+         <children>
+            <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="396.0" prefWidth="440.0" stylesheets="@notes.css">
+               <content>
+                  <TextArea fx:id="noteArea" prefHeight="396.0" prefWidth="440.0" promptText="Your Note go here" styleClass="paneClr" stylesheets="@notes.css" wrapText="true">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="23.0" />
+                     </font></TextArea>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="250.0" layoutY="26.0" prefHeight="45.0" prefWidth="426.0">
+         <children>
+            <TextField fx:id="noteTitle" layoutX="1.0" layoutY="-6.0" prefHeight="50.0" prefWidth="351.0" promptText="Enter Title of your Note">
+               <font>
+                  <Font name="Bookman Old Style Bold" size="21.0" />
+               </font>
+            </TextField>
+            <Button fx:id="noteSaveBtn" layoutX="354.0" layoutY="5.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" text="SAVE">
+               <font>
+                  <Font name="STXinwei" size="16.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <TextField fx:id="searchBar" layoutX="3.0" layoutY="21.0" prefHeight="34.0" prefWidth="154.0" promptText="search notes" stylesheets="@notes.css" />
+      <ImageView fx:id="searchBtn" blendMode="COLOR_BURN" fitHeight="32.0" fitWidth="28.0" layoutX="199.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@search.gif" />
+         </image>
+      </ImageView>
+
+      <Button fx:id="createNewBtn" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="3.0" layoutY="64.0" maxHeight="30.0" minHeight="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" text="NEW NOTE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="showAllBtn" layoutX="3.0" layoutY="64.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="228.0" text="SHOW ALL">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

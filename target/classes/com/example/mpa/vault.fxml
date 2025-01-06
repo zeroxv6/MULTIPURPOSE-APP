@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="537.0" stylesheets="@vault.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mpa.vaultController">
+    <children>
+        <Label alignment="CENTER" prefHeight="68.0" prefWidth="538.0" styleClass="heading" text="SAVE NEW PASSWORDS" textFill="WHITE">
+            <font>
+                <Font name="Chiller" size="47.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="130.0" layoutY="79.0" prefHeight="22.0" prefWidth="239.0">
+            <font>
+                <Font name="Gill Sans MT Condensed" size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane fx:id="input" layoutY="94.0" prefHeight="138.0" prefWidth="496.0">
+            <children>
+                <TextField fx:id="vaultUserName" alignment="CENTER" layoutX="1.0" layoutY="40.0" prefHeight="32.0" prefWidth="179.0" promptText="USERNAME" styleClass="data" stylesheets="@vault.css" />
+                <PasswordField fx:id="vaultUserPassword" alignment="CENTER" layoutX="179.0" layoutY="40.0" prefHeight="32.0" prefWidth="179.0" promptText="PASSWORD" styleClass="data" />
+                <TextField fx:id="vaultMisc" alignment="CENTER" layoutX="358.0" layoutY="40.0" prefHeight="32.0" prefWidth="179.0" promptText="EMAIL / WEBSITE" styleClass="data" />
+                <Button fx:id="vaultSaveButton" defaultButton="true" layoutX="241.0" layoutY="81.0" mnemonicParsing="false" onAction="#vaultSave">
+                    <graphic>
+                        <ImageView fx:id="vaultSaveImage" fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@tick.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Label alignment="CENTER" layoutY="14.0" prefHeight="22.0" prefWidth="179.0" styleClass="sub" text="USERNAME" textFill="WHITE">
+                    <font>
+                        <Font name="Berlin Sans FB" size="14.399999618530273" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="179.0" layoutY="13.0" prefHeight="22.0" prefWidth="179.0" styleClass="sub" text="PASSWORD" textFill="WHITE">
+                    <font>
+                        <Font name="Berlin Sans FB" size="14.399999618530273" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="358.0" layoutY="14.0" prefHeight="22.0" prefWidth="179.0" styleClass="sub" text="EMAIL / WEBSITE" textFill="WHITE">
+                    <font>
+                        <Font name="Berlin Sans FB" size="14.399999618530273" />
+                    </font>
+                </Label>
+                <Label layoutX="244.0" layoutY="113.0" text="SAVE" textFill="WHITE" />
+                <ImageView fx:id="vaultSettings" fitHeight="30.0" fitWidth="28.0" layoutX="292.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@settingsIcon.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fx:id="vaultScroll" hbarPolicy="NEVER" layoutY="281.0" prefHeight="294.0" prefWidth="537.0" vbarPolicy="ALWAYS">
+            <content>
+                <AnchorPane fx:id="show" prefHeight="294.0" prefWidth="519.0">
+                    <children>
+                        <VBox fx:id="vboxUserName" layoutX="56.0" layoutY="38.0" prefHeight="232.0" prefWidth="140.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></VBox>
+                        <VBox fx:id="vboxPassword" layoutX="199.0" layoutY="38.0" prefHeight="232.0" prefWidth="140.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></VBox>
+                        <VBox fx:id="vboxMisc" layoutX="344.0" layoutY="38.0" prefHeight="232.0" prefWidth="140.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></VBox>
+                        <Label alignment="CENTER" layoutX="56.0" layoutY="14.0" prefHeight="22.0" prefWidth="140.0" styleClass="sub" text="USERNAME" textFill="WHITE">
+                            <font>
+                                <Font name="Berlin Sans FB" size="14.399999618530273" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="204.0" layoutY="14.0" prefHeight="22.0" prefWidth="140.0" styleClass="sub" text="PASSWORD" textFill="WHITE">
+                            <font>
+                                <Font name="Berlin Sans FB" size="14.399999618530273" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="344.0" layoutY="14.0" prefHeight="22.0" prefWidth="140.0" styleClass="sub" text="EMAIL / WEBSITE" textFill="WHITE">
+                            <font>
+                                <Font name="Berlin Sans FB" size="14.399999618530273" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="219.0" prefHeight="68.0" prefWidth="538.0" styleClass="heading" text="SAVED PASSWORDS" textFill="WHITE">
+         <font>
+            <Font name="Chiller" size="47.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

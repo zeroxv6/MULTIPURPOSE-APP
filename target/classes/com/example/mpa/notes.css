@@ -1,0 +1,84 @@
+.toggle-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: green;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+}
+*{
+    -fx-font-family: "OCR A Extended";
+
+}
+
+.bg {
+    -fx-background-color: #2B2D31;
+}
+
+TextArea {
+    -fx-background-color: #313338;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+}
+
+AnchorPane {
+    -fx-background-color: #313338;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.paneClr {
+    -fx-background-color: #313338;
+
+}
+
+ScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+#noteArea {
+    -fx-control-inner-background: #383A40;
+    -fx-text-fill: white;
+    /*-fx-font-family: "Roboto", sans-serif;*/
+    -fx-font-size: 15px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-prompt-text-fill: white;
+}
+
+#noteTitle, #searchBar {
+    -fx-control-inner-background: #383A40;
+    -fx-text-fill: white;
+    -fx-border-color: #bba137;
+    /*-fx-font-family: "Roboto", sans-serif;*/
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: white;
+
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#savedShow {
+    -fx-background-color: #383A40;
+    /*-fx-padding: 10;*/
+    /*-fx-spacing: 5;*/
+    -fx-border-color: #bba137;
+
+}
+
+ScrollPane {
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+Button{
+    -fx-background-color: #474751;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+
+

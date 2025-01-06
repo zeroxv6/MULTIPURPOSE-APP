@@ -1,0 +1,21 @@
+/* dialog-styles.css */
+.dialog-pane {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 5;
+}

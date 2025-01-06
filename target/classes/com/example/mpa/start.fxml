@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="logoBG" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" stylesheets="@start.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mpa.startController">
+   <children>
+      <Label fx:id="logo1" layoutX="172.0" layoutY="79.0" prefHeight="47.0" prefWidth="255.0" stylesheets="@start.css" text="prod" textFill="#867878">
+         <font>
+            <Font name="Modern No. 20" size="94.0" />
+         </font>
+      </Label>
+      <Label fx:id="logo" layoutX="334.0" layoutY="59.0" prefHeight="95.0" prefWidth="106.0" text="IP" textFill="#867878">
+         <font>
+            <Font name="Jokerman" size="89.0" />
+         </font>
+      </Label>
+      <Label layoutX="401.0" layoutY="189.0" text="ipRMNv4">
+         <font>
+            <Font name="Lucida Console" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="131.0" layoutY="277.0" text="A MULTIPURPOSE PRODUCTIVITY APPLICATION" textFill="#8c0202">
+         <font>
+            <Font name="Courier New" size="14.399999618530273" />
+         </font>
+      </Label>
+      <Label layoutX="404.0" layoutY="118.0" text="v4" textFill="#0000007d">
+         <font>
+            <Font name="Modern No. 20" size="59.0" />
+         </font>
+      </Label>
+      <Button fx:id="test" disable="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" opacity="0.0" prefHeight="0.0" prefWidth="0.0" text="Button" />
+   </children>
+</AnchorPane>
