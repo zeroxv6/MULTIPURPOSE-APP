@@ -1,0 +1,200 @@
+#mainBg{
+    /*-fx-background-color: rgb(20, 219, 168)*/
+    /*-fx-background-color: rgb(175, 255, 228)*/
+    -fx-background-color: #2B2D31;
+}
+
+
+AnchorPane #progressBar{
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: yellow;
+    -fx-accent: #9b6c1e;
+}
+/*#notesMain{*/
+/*    -fx-font-family: "Mauline", sans-serif;*/
+/*    -fx-background-color: rgba(0, 255, 255, 0.26);*/
+/*    -fx-font-size: 30px;*/
+/*    -fx-background-radius: 25px;*/
+/*}*/
+
+/*#screenTimeMain {*/
+/*    -fx-font-family: "Mauline", sans-serif;*/
+/*    !*-fx-background-color: rgba(0, 255, 255, 0.26);*!*/
+/*    -fx-background-color: #2B2D31;*/
+/*    -fx-font-size: 30px;*/
+/*    -fx-background-radius: 18px;*/
+
+/*}*/
+
+.rectHead{
+    -fx-background-color: #1f2324;
+    /*-fx-font-family: "Mauline", sans-serif;*/
+    -fx-font-family: "OCR A Extended", Regular;
+    -fx-font-size: 30px;
+    -fx-background-radius: 15px;
+    /*-fx-text-fill: white;*/
+    -fx-text-fill: #bba137;
+}
+
+/*#pswdMain{*/
+/*    -fx-font-family: "Mauline", sans-serif;*/
+/*    -fx-background-color: rgba(0, 255, 255, 0.26);*/
+/*    -fx-font-size: 30px;*/
+/*    -fx-background-radius: 25px;*/
+/*}*/
+/*#pswdBtn{*/
+/*    -fx-border-color: black;*/
+
+/*}*/
+
+#scrollActive{
+    -fx-arc-height: 30;
+    -fx-arc-width: 30;
+    -fx-background-color: #383A40;
+    -fx-padding: 0;
+
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #bba137; /* Change this to your desired color */
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent; /* Light gray for buttons */
+}
+
+.scroll-bar{
+    -fx-background-color: #313338;
+}
+/*.scroll-bar .track {*/
+
+/*    -fx-background-color: #d3d3d3; !* Light gray for the track *!*/
+
+/*}*/
+
+
+#scrollActive .viewport {
+    /*-fx-background-color: transparent  !* Make the viewport background transparent *!*/
+
+}
+
+#scrollActive .scroll-bar {
+    -fx-opacity: 1;  /* Hide the scrollbars */
+    /*-fx-background-color: #383A40;*/
+    -fx-background-color: #2B2D31;
+}
+
+.buttons{
+    -fx-font-family: "OCR A Extended", Regular;
+    -fx-background-color: #383A40;
+    -fx-text-fill: #D9DCDF;
+    -fx-border-color: #bba137;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 18px;
+}
+
+
+#active{
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #43454b;
+    -fx-font-family: "MS UI Gothic";
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-arc-height: 30;
+    -fx-arc-width: 30;
+}
+#activePane{
+    -fx-wrap-text: true;
+}
+.rounded-rectangle{
+
+    -fx-fill: rgba(255, 255, 255, 0.7);
+    -fx-arc-height: 30;
+    -fx-arc-width: 30;
+    -fx-border-radius: 10px;
+    -fx-border-color: yellow; /* Border color */
+    -fx-border-width: 20px; /* Border width */
+}
+.chatUI{
+    -fx-background-color: #313338;
+    /*-fx-border-color: black;*/
+    /*-fx-border-radius: 2px;*/
+    -fx-text-fill: white;
+}
+#chatScroll{
+    -fx-background-color: #313338;
+    /*-fx-background-color: #bba137;*/
+
+}
+ScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+#chatVBox{
+    -fx-background-color: #313338;
+    /*-fx-border-color: black;*/
+    /*-fx-border-radius: 2px;*/
+    -fx-text-fill: white;
+}
+#chatInput{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    /*-fx-border-color: #5b5e67;*/
+    -fx-border-color: #bba137;
+    -fx-border-radius: 20;
+}
+#chatSend{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: #bba137;
+    -fx-border-radius: 20;
+    /*-fx-border-color: black;*/
+}
+#pfp{
+    -fx-fill: #383A40;
+}
+
+#pswdBg{
+    -fx-fill: #383A40;
+}
+
+#leaderboardMain{
+    -fx-fill: #313338;
+ }
+#random1{
+    -fx-fill: #313338;
+}#random2{
+     -fx-fill: #313338;
+}#random3{
+      -fx-fill: #313338;
+}#random4{
+    -fx-fill: #313338;
+}#random5{
+    -fx-fill: #313338;
+}#random6{
+    -fx-fill: #313338;
+}#random7{
+    -fx-fill: #313338;
+}
+
+ #menu{
+     -fx-background-color: #191818;
+ }
+#progressBar{
+    -fx-accent: #bba137;
+    -fx-background-color: #1f2324;
+    /*-fx-border-color: #313338;*/
+    -fx-border-color: #1f2324;
+    -fx-border-radius: 1px;
+}
+
+.progress-bar .track {
+    -fx-background-color: #1f2324; /* Change this to the desired unfilled color */
+
+}
+#totalLabel{
+    -fx-font-family: "OCR A Extended";
+}
+
+#pfpView{
+    -fx-clip: circle;
+}

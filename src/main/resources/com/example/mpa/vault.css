@@ -1,0 +1,48 @@
+#vaultScroll {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+#show {
+    -fx-background-color: #383A40;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+#input {
+    -fx-background-color: #383A40;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+AnchorPane {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+ScrollPane {
+    -fx-border-color: #484952;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+ScrollPane .viewport {
+    -fx-background-color: #383A40;
+}
+
+.data {
+    -fx-background-color: #484952;
+    -fx-border-color: white;
+    -fx-padding: 0;
+}
+#bg{
+    -fx-background-color: #2B2D31;
+}
+
+.sub{
+    -fx-font-family: "OCR A Extended";
+}

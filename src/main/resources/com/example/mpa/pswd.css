@@ -1,0 +1,25 @@
+#pswdBg{
+    -fx-background-color: #383A40;
+}#pswdHeading{
+
+     -fx-effect: innershadow(gaussian, black, 5, 0, 2, 2);
+
+
+ }
+
+ #pswdBox{
+     -fx-border-color: black;
+     -fx-background-color: #4b4e55;
+ }
+
+
+ #confirmClicked{
+     -fx-background-color: #383A40;
+     -fx-text-fill: #D9DCDF;
+     -fx-border-color: black;
+     -fx-border-radius: 18px;
+ }
+
+ #pswdHeading{
+     /*-fx-text-fill: white;*/
+ }

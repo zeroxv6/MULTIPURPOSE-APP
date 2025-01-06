@@ -1,0 +1,18 @@
+#logoBG{
+    -fx-background-color: #bba137;
+}
+
+
+#logo1{
+    -fx-text-fill: #000000;
+}
+#logo{
+    /*-fx-background-color: rgba(0, 0, 0, 0.24);*/
+    -fx-text-fill: rgb(0, 0, 0);
+}
+
+#loading{
+    -fx-border-color: #bba137;
+    -fx-accent: black;
+    -fx-background-color: transparent;
+}

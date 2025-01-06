@@ -1,0 +1,41 @@
+AnchorPane{
+    /*-fx-background-color: #bba137;*/
+    -fx-background-color: white;
+}
+
+.input{
+    /*-fx-background-color: #2f2c2c;*/
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+    /*-fx-border-color: #4ef7c4;*/
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-font-family: "OCR A Extended";
+    -fx-font-size: 23px;
+
+}
+.input .text {
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0.5, 3, 3);
+    -fx-font-size: 23px; /* Set the font size of the text */
+    -fx-text-fill: white; /* Set the fill color of the text */
+}
+
+#btn{
+    /*-fx-border-color: #00ffb2;*/
+    -fx-border-color: #bba137;
+    -fx-text-fill: white;
+    -fx-background-color: #383A40;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+Label{
+    -fx-text-fill: white;
+}
+
+.logo{
+    /*-fx-text-fill: #00ffb2;*/
+    -fx-text-fill: #bba137;
+}
