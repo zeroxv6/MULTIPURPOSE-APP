@@ -5,7 +5,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -50,7 +56,9 @@ public class notesController implements Initializable {
     private notesManager notesManager;
 
 
-    int userId = 1;
+    String filePath = "src/main/resources/data/user.json";
+    ScreenTimeManager manager = new ScreenTimeManager();
+    int userId = manager.getUserId(readUserFromJSON(filePath));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,6 +79,35 @@ public class notesController implements Initializable {
             showAllBtn.setDisable(true);
             showNotes();
         });
+    }
+    public static String readUserFromJSON(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            boolean jsonStarted = false;
+
+            while ((line = br.readLine()) != null) {
+                if (line.trim().startsWith("{")) {
+                    jsonStarted = true;
+                }
+                if (jsonStarted) {
+                    jsonContent.append(line);
+                }
+            }
+
+            JSONObject jsonObject = new JSONObject(jsonContent.toString());
+            JSONArray userData = jsonObject.getJSONArray("userData");
+
+            if (userData.length() > 0) {
+                JSONObject userObject = userData.getJSONObject(0);
+                return userObject.getString("user");
+            }
+
+        } catch (IOException | JSONException e) {
+            System.out.println("Error reading JSON file: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void showNotes() {
