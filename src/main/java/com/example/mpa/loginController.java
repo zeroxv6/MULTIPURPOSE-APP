@@ -1,16 +1,23 @@
 package com.example.mpa;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 public class loginController implements Initializable {
 
@@ -33,6 +40,8 @@ public class loginController implements Initializable {
     private Label pswdL;
     private Consumer<Boolean> loginCallback;
 
+    String filePath = "src/main/resources/data/user.json";
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         emailL.setVisible(false);
@@ -42,6 +51,7 @@ public class loginController implements Initializable {
         btn.setOnAction(e -> {
             checkUser();
         });
+
 
     }
     public void setLoginCallback(Consumer<Boolean> callback) {
@@ -54,8 +64,13 @@ public class loginController implements Initializable {
         String user = username.getText();
         String pass = password.getText();
         String mail = email.getText();
-        loginManager.addUser(user,pass,mail);
+        Argon2 argon2 = Argon2Factory.create();
+        String hashedPassword = argon2.hash(2, 65536, 1, pass.toCharArray());
+        loginManager.addUser(user,hashedPassword,mail);
+
+        writeToJSON(user,filePath);
     }
+
     public void checkUser(){
         loginManager loginManager = new loginManager();
         String user = username.getText();
@@ -75,7 +90,7 @@ public class loginController implements Initializable {
                     System.out.println("Login Successful");
                     if (loginCallback != null) {
 
-                        loginCallback.accept(true); // Notify success
+                        loginCallback.accept(true);
 
                     }
                 }
@@ -83,7 +98,7 @@ public class loginController implements Initializable {
                     System.out.println("Login Failed");
                     if (loginCallback != null) {
 
-                        loginCallback.accept(false); // Notify failure
+                        loginCallback.accept(false);
 
                     }
                 }
@@ -101,10 +116,35 @@ public class loginController implements Initializable {
                 addUser();
                 if (loginCallback != null) {
 
-                    loginCallback.accept(true); // Notify success
-
+                    loginCallback.accept(true);
                 }
             });
+        }
+    }
+    public void writeToJSON(String username, String filePath) {
+        loginManager loginManager = new loginManager();
+        String confirmedUsername = loginManager.getUsername(username);
+
+        if (confirmedUsername != null) {
+            JSONObject jsonObject = new JSONObject();
+            JSONArray userDataArray = new JSONArray();
+            JSONObject userObject = new JSONObject();
+
+
+            userObject.put("user", confirmedUsername);
+
+            userDataArray.put(userObject);
+            jsonObject.put("userData", userDataArray);
+
+            try (FileWriter file = new FileWriter(filePath)) {
+                file.write(jsonObject.toString(4));
+                System.out.println("JSON file has been created successfully");
+            } catch (IOException e) {
+                System.out.println("Error writing to JSON file: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Username not found in database");
         }
     }
 }
