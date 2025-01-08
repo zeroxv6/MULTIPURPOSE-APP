@@ -10,9 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,6 +62,10 @@ public class vaultController implements Initializable {
     private ImageView delImg;
 
 
+    String filePath = "src/main/resources/data/user.json";
+    ScreenTimeManager manager = new ScreenTimeManager();
+    int userID = manager.getUserId(readUserFromJSON(filePath));
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         vaultScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -65,6 +75,35 @@ public class vaultController implements Initializable {
             vaultSave(event);
         });
     }
+    public static String readUserFromJSON(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            boolean jsonStarted = false;
+
+            while ((line = br.readLine()) != null) {
+                if (line.trim().startsWith("{")) {
+                    jsonStarted = true;
+                }
+                if (jsonStarted) {
+                    jsonContent.append(line);
+                }
+            }
+
+            JSONObject jsonObject = new JSONObject(jsonContent.toString());
+            JSONArray userData = jsonObject.getJSONArray("userData");
+
+            if (userData.length() > 0) {
+                JSONObject userObject = userData.getJSONObject(0);
+                return userObject.getString("user");
+            }
+
+        } catch (IOException | JSONException e) {
+            System.out.println("Error reading JSON file: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public void vaultSave(ActionEvent actionEvent) {
         String username = vaultUserName.getText();
@@ -73,15 +112,15 @@ public class vaultController implements Initializable {
 
         vaultManager vaultController = new vaultManager();
 
-        vaultController.updatePassword(username, password, misc);
+        vaultController.updatePassword(username, password, misc, userID);
         showPassword();
     }
 
     public void showPassword(){
-        List<String> vaultUserName = vaultManager.getUserNames();
-        List<String> vaultPasswords = vaultManager.getUserPasswords();
-        List<String> vaultMisc = vaultManager.getMiscData();
-        int totalRows = vaultManager.getRows();
+        List<String> vaultUserName = vaultManager.getUserNames(userID);
+        List<String> vaultPasswords = vaultManager.getUserPasswords(userID);
+        List<String> vaultMisc = vaultManager.getMiscData(userID);
+        int totalRows = vaultManager.getRows(userID);
         vboxUserName.getChildren().clear();
         vboxPassword.getChildren().clear();
         vboxMisc.getChildren().clear();
