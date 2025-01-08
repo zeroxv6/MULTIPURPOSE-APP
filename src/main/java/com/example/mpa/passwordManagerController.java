@@ -14,12 +14,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class passwordManagerController implements Initializable {
 
@@ -47,28 +52,38 @@ public class passwordManagerController implements Initializable {
                 }
             });
         }
-//        else {
-//            System.out.println("confirmClicked is null! Check the FXML file.");
-//        }
-//        if(homeBtn != null) {
-//            homeBtn.setOnAction(event -> {
-//                try{
-//                    getBack(event);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            });
-//        }
-//        else{
-//            System.out.println("homeBtn is null! Check the FXML file.");
-//        }
 
+
+    }
+    public String readUserFromJSON(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                jsonContent.append(line);
+            }
+
+            JSONObject jsonObject = new JSONObject(jsonContent.toString());
+            JSONArray userData = jsonObject.getJSONArray("userData");
+
+            if (userData.length() > 0) {
+                JSONObject userObject = userData.getJSONObject(0);
+                return userObject.getString("user");
+            }
+
+        } catch (IOException | JSONException e) {
+            System.out.println("Error reading JSON file: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
     public void confirmPassword(ActionEvent event)throws IOException{
-
-        String password = "raman";
+        String filePath = "src/main/resources/data/user.json";
+        loginManager pw = new loginManager();
+        String username = readUserFromJSON(filePath);
+        String password = pw.getPass(username);
         Argon2 argon2 = Argon2Factory.create();
         String hashedPassword = argon2.hash(2, 65536, 1, password.toCharArray());
         String userPassword = pswdBox.getText();
