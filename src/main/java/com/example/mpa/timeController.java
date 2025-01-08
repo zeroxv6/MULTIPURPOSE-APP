@@ -27,6 +27,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -103,6 +106,9 @@ public class timeController implements Initializable {
     @FXML
     private TableColumn<AssignmentData, Void> actionsCol;
 
+    @FXML
+    private Button schSetup;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -111,6 +117,10 @@ public class timeController implements Initializable {
     private BufferedReader br;
     private PrintWriter pr;
     private Scanner sc;
+
+    String filePath = "src/main/resources/data/user.json";
+    ScreenTimeManager manager = new ScreenTimeManager();
+    int userID = manager.getUserId(readUserFromJSON(filePath));
 
     BigDecimal progress = new BigDecimal(String.format("%.2f", 0.0));
 
@@ -133,8 +143,14 @@ public class timeController implements Initializable {
         String filePath = "src/main/resources/data/data.txt";
         setupTableView();
         populateTableView(readFileLines(filePath));
-//        String displaySubmission = getDueDate();
-//        System.out.printf(displaySubmission);
+
+        schSetup.setOnAction((ActionEvent event) -> {
+            try {
+                scheduleSetUp();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -192,7 +208,35 @@ public class timeController implements Initializable {
         });
         loadTodoItems();
     }
+    public static String readUserFromJSON(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            boolean jsonStarted = false;
 
+            while ((line = br.readLine()) != null) {
+                if (line.trim().startsWith("{")) {
+                    jsonStarted = true;
+                }
+                if (jsonStarted) {
+                    jsonContent.append(line);
+                }
+            }
+
+            JSONObject jsonObject = new JSONObject(jsonContent.toString());
+            JSONArray userData = jsonObject.getJSONArray("userData");
+
+            if (userData.length() > 0) {
+                JSONObject userObject = userData.getJSONObject(0);
+                return userObject.getString("user");
+            }
+
+        } catch (IOException | JSONException e) {
+            System.out.println("Error reading JSON file: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public void getActive() {
 
@@ -251,8 +295,8 @@ public class timeController implements Initializable {
 
 
 //                manager.updateAppScreenTime(windowTitle, timeSpentInMillis);
-                manager.updateAppScreenTime(appName, timeSpentInMillis);
-                String getData = manager.printScreenTime();
+                manager.updateAppScreenTime(appName, timeSpentInMillis, userID);
+                String getData = manager.printScreenTime(userID);
                 lastUpdateTime = currentTimeMillis;
 
 
@@ -291,7 +335,7 @@ public class timeController implements Initializable {
 
     public void progressBarControl() {
         ScreenTimeManager manager = new ScreenTimeManager();
-        double finalTime = manager.printSumTime();
+        double finalTime = manager.printSumTime(userID);
         double totalMin = finalTime *24*60;
         double hours = totalMin / 60;
         double minutes = totalMin % 60;
@@ -486,11 +530,9 @@ public class timeController implements Initializable {
         }
     }
     private void setupTableView() {
-        // Set up the columns
         submissionDateCol.setCellValueFactory(new PropertyValueFactory<>("submissionDate"));
         subjectCodeCol.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
 
-        // Set up the actions column with buttons
         actionsCol.setCellFactory(column -> new TableCell<AssignmentData, Void>() {
             private final Button actionButton = new Button("Action");
             {
@@ -513,11 +555,11 @@ public class timeController implements Initializable {
     }
 
     private void handleActionButton(AssignmentData data) {
-        // Handle button click for each row
+
         System.out.println("Action button clicked for:");
         System.out.println("Submission Date: " + data.getSubmissionDate());
         System.out.println("Subject Code: " + data.getSubjectCode());
-        // Add your custom action handling here
+
     }
 
     private void populateTableView(List<String> lines) {
@@ -525,7 +567,7 @@ public class timeController implements Initializable {
 
         for (String line : lines) {
             try {
-                // Assuming the format is "Submission Date: <date> Subject Code: <code>"
+
                 String[] parts = line.split(" ");
                 if (parts.length >= 6) {
                     String submissionDate = parts[2];
@@ -541,6 +583,27 @@ public class timeController implements Initializable {
         assignmentTable.setItems(data);
     }
 
+
+    public void scheduleSetUp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("schedule.fxml"));
+        Parent root = loader.load();
+
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.setTitle("Schedule Setup");
+        newStage.show();
+    }
+
+    public void scheduleDisplay(){
+        scheduleController schedule = new scheduleController();
+        String sTitle = schedule.getTitle();
+        String sTimeFrom = schedule.getTimeFrom();
+        String sTimeTo = schedule.getTimeTo();
+        String sDateFrom = schedule.getDateFrom();
+        String sDateTo = schedule.getDateTo();
+
+    }
 
 
 }
