@@ -1,62 +1,3 @@
-//package com.example.mpa;
-//
-//import javafx.animation.PauseTransition;
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.stage.Stage;
-//import javafx.util.Duration;
-//
-//public class Start extends Application {
-//
-//    @Override
-//    public void start(Stage primaryStage) {
-//        try {
-//
-//            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("start.fxml"));
-//            Parent root = fxmlLoader.load();
-//            Scene scene = new Scene(root, 600, 300);
-//
-//            primaryStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
-//            primaryStage.setResizable(false);
-//            primaryStage.setTitle("prodIPv4");
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//
-//
-//            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-//            pause.setOnFinished(event -> {
-//                primaryStage.close(); // Close the first window
-//                openSecondWindow(); // Open the second window
-//            });
-//            pause.play();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void openSecondWindow() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-//            Parent root = loader.load();
-//            Stage secondStage = new Stage();
-//            Scene secondScene = new Scene(root);
-//            timeController controller = loader.getController();
-//            controller.getActive();
-//            secondStage.setTitle("MAIN");
-//            secondStage.setScene(secondScene);
-//            secondStage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//}
 
 package com.example.mpa;
 
@@ -67,8 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Start extends Application {
+
+    String filePath = "src/main/resources/data/user.json";
 
     @Override
     public void start(Stage primaryStage) {
@@ -86,9 +35,20 @@ public class Start extends Application {
 
 
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
+//            pause.setOnFinished(event -> {
+//                primaryStage.close();
+//                checkData();
+//                openLoginWindow();
+//            });
+//            pause.play();
+
             pause.setOnFinished(event -> {
                 primaryStage.close();
-                openLoginWindow();
+                if (checkJSONFormat(filePath)) {
+                    openMainWindow();
+                } else {
+                    openLoginWindow();
+                }
             });
             pause.play();
 
@@ -136,6 +96,51 @@ public class Start extends Application {
             mainStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    private void checkData(){
+
+        StringBuilder jsonContent = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                jsonContent.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonObject = new JSONObject(jsonContent.toString());
+        JSONArray userData = jsonObject.getJSONArray("userData");
+
+        for (int i = 0; i < userData.length(); i++) {
+            JSONObject student = userData.getJSONObject(i);
+            String username = student.getString("user");
+            String password = student.getString("pass");
+
+            System.out.println("Username: " + username + ", Password: " + password);
+        }
+    }
+
+    public static boolean checkJSONFormat(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                jsonContent.append(line);
+            }
+
+            JSONObject jsonObject = new JSONObject(jsonContent.toString());
+            JSONArray userData = jsonObject.getJSONArray("userData");
+
+            if (userData.length() > 0) {
+                JSONObject firstObject = userData.getJSONObject(0);
+                return firstObject.has("user");
+            }
+            return false;
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
         }
     }
 
