@@ -10,55 +10,54 @@ import java.util.List;
 
 public class vaultManager {
 
-    public void updatePassword(String userName, String userPassword, String miscData) {
+    public void updatePassword(String userName, String userPassword, String miscData, int userId) {
         String sql = """
-                INSERT INTO vault(userName, userPassword, websiteName)
-                VALUES(?,?,?)
-                """;
+            INSERT INTO vault(userName, userPassword, websiteName, userId)
+            VALUES(?,?,?,?)
+        """;
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, userName);
             pstmt.setString(2, userPassword);
             pstmt.setString(3, miscData);
+            pstmt.setInt(4, userId);
 
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Error Occured.");
+            System.out.println("Error Occurred.");
             e.printStackTrace();
         }
     }
 
-    public static int getRows(){
-        String sql = """
-                SELECT COUNT(*) FROM vault;
-                """;
+    public static int getRows(int userId) {
+        String sql = "SELECT COUNT(*) FROM vault WHERE userId = ?";
 
         int rowCount = 0;
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                rowCount = rs.getInt("COUNT(*)");
+                rowCount = rs.getInt(1);
             }
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error: Unable to get row count from 'vault' table.");
             e.printStackTrace();
         }
         return rowCount;
-
     }
 
-    public static List<String> getUserNames() {
+    public static List<String> getUserNames(int userId) {
         List<String> vaultUserName = new ArrayList<>();
-        String sql = "SELECT userName FROM vault";
+        String sql = "SELECT userName FROM vault WHERE userId = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String username = rs.getString("userName");
@@ -73,13 +72,14 @@ public class vaultManager {
         return vaultUserName;
     }
 
-    public static List<String> getUserPasswords() {
+    public static List<String> getUserPasswords(int userId) {
         List<String> vaultPasswords = new ArrayList<>();
-        String sql = "SELECT userPassword FROM vault";
+        String sql = "SELECT userPassword FROM vault WHERE userId = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String password = rs.getString("userPassword");
@@ -94,13 +94,14 @@ public class vaultManager {
         return vaultPasswords;
     }
 
-    public static List<String> getMiscData() {
+    public static List<String> getMiscData(int userId) {
         List<String> vaultMisc = new ArrayList<>();
-        String sql = "SELECT websiteName FROM vault";
+        String sql = "SELECT websiteName FROM vault WHERE userId = ?";
 
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 String misc = rs.getString("websiteName");
