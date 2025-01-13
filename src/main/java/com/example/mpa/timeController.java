@@ -109,6 +109,34 @@ public class timeController implements Initializable {
     @FXML
     private Button schSetup;
 
+    @FXML
+    private TableView<Schedule> scheduleTable;
+
+    @FXML
+    private TableColumn<Schedule, String> schTitle;
+
+    @FXML
+    private TableColumn<Schedule, String> schfrom;
+
+    @FXML
+    private TableColumn<Schedule, String> schTo;
+
+    @FXML
+    private TableView<Schedule> currentScheduleTable;
+
+    @FXML
+    private TableColumn<Schedule, String> currO;
+
+    @FXML
+    private TableColumn<Schedule, String> currF;
+
+    @FXML
+    private TableColumn<Schedule, String> currT;
+
+    private ObservableList<Schedule> currentScheduleList;
+
+    private ObservableList<Schedule> scheduleList;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -118,6 +146,9 @@ public class timeController implements Initializable {
     private PrintWriter pr;
     private Scanner sc;
 
+
+    private List<String> completedScheduleTopics = new ArrayList<>();
+
     String filePath = "src/main/resources/data/user.json";
     ScreenTimeManager manager = new ScreenTimeManager();
     int userID = manager.getUserId(readUserFromJSON(filePath));
@@ -125,6 +156,7 @@ public class timeController implements Initializable {
     BigDecimal progress = new BigDecimal(String.format("%.2f", 0.0));
 
     private static final String TODO_FILE_PATH = "src/main/resources/data/todoItems.txt";
+    private static final String COMPLETED_TASKS_FILE_PATH = "src/main/resources/data/completedTasks.txt";
 
     public static class AssignmentData {
         private String submissionDate;
@@ -203,11 +235,116 @@ public class timeController implements Initializable {
 //        });
 //        progressButton.setOnAction(event -> progressBarControl());
 
+
         todoBtn.setOnMouseClicked(event -> {
+            System.out.println("Todo button clicked");
             todo();
         });
+
+
+        Timeline todoRefreshTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(3), event -> {
+                    System.out.println("Executing scheduled todo refresh...");
+                    loadTodoItems();
+                })
+        );
+        todoRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        todoRefreshTimeline.play();
+
+        System.out.println("Performing initial todo items load...");
         loadTodoItems();
+
+        schTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        schfrom.setCellValueFactory(new PropertyValueFactory<>("timeFrom"));
+        schTo.setCellValueFactory(new PropertyValueFactory<>("timeTo"));
+
+        scheduleList = FXCollections.observableArrayList();
+        scheduleTable.setItems(scheduleList);
+
+
+
+        currO.setCellValueFactory(new PropertyValueFactory<>("title"));
+        currF.setCellValueFactory(new PropertyValueFactory<>("timeFrom"));
+        currT.setCellValueFactory(new PropertyValueFactory<>("timeTo"));
+
+        currentScheduleList = FXCollections.observableArrayList();
+        currentScheduleTable.setItems(currentScheduleList);
+
+        loadCurrentSchedulesToTable();
+
+        Timeline refreshTimeline2 = new Timeline(
+                new KeyFrame(Duration.seconds(5), event -> loadCurrentSchedulesToTable())
+        );
+        refreshTimeline2.setCycleCount(Timeline.INDEFINITE);
+        refreshTimeline2.play();
+
+        currentScheduleTable.setStyle(
+                ".table-view .virtual-flow .scroll-bar:vertical," +
+                        ".table-view .virtual-flow .scroll-bar:horizontal {" +
+                        "    -fx-opacity: 0;" +
+                        "    -fx-padding: 0;" +
+                        "}"
+        );
+
+        loadSchedulesToTable();
+        Timeline refreshTimeline3 = new Timeline(
+                new KeyFrame(Duration.seconds(5), event -> loadCurrentSchedulesToTable())
+        );
+        refreshTimeline3.setCycleCount(Timeline.INDEFINITE);
+        refreshTimeline3.play();
+
+        Timeline assignmentRefreshTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(5), event -> {
+                    String filePathh = "src/main/resources/data/data.txt";
+                    populateTableView(readFileLines(filePathh));
+                })
+        );
+        assignmentRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        assignmentRefreshTimeline.play();
     }
+
+    private void loadSchedulesToTable() {
+        scheduleManager sManager = new scheduleManager();
+        scheduleList.clear();
+
+        List<Schedule> allSchedules = sManager.getAllSchedules(userID);
+        scheduleList.addAll(allSchedules);
+    }
+
+
+    private void loadCurrentSchedulesToTable() {
+        scheduleManager sManager = new scheduleManager();
+        currentScheduleList.clear();
+
+        List<Schedule> currentSchedules = sManager.getCurrentSchedules(userID);
+        currentScheduleList.addAll(currentSchedules);
+    }
+
+
+    public static class Schedule {
+        private final String title;
+        private final String timeFrom;
+        private final String timeTo;
+
+        public Schedule(String title, String timeFrom, String timeTo) {
+            this.title = title;
+            this.timeFrom = timeFrom;
+            this.timeTo = timeTo;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getTimeFrom() {
+            return timeFrom;
+        }
+
+        public String getTimeTo() {
+            return timeTo;
+        }
+    }
+
     public static String readUserFromJSON(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             StringBuilder jsonContent = new StringBuilder();
@@ -277,7 +414,7 @@ public class timeController implements Initializable {
                 String appName = fullPath.substring(fullPath.lastIndexOf("\\") + 1);
                 if (appName.endsWith(".exe")) {
 
-                    appName = appName.substring(0, appName.length() - 4); // Remove the last 4 characters
+                    appName = appName.substring(0, appName.length() - 4);
                     System.out.println(appName);
                 }
 //                System.out.println("Active Window App Name: " + appName);
@@ -339,29 +476,9 @@ public class timeController implements Initializable {
         double totalMin = finalTime *24*60;
         double hours = totalMin / 60;
         double minutes = totalMin % 60;
-//        System.out.println("%.0f:%.0f", hours, minutes);
         totalLabel.setText(String.format("Total Screen Time: %.0f hours %.0f minutes", hours, minutes));
         System.out.println(finalTime);
         progressBar.setProgress(finalTime);
-//        if (progress.doubleValue() < 24) {
-//            progress = new BigDecimal(String.format("%.2f", progress.doubleValue() + finalTime));
-//            progressBar.setProgress(progress.doubleValue());
-//            totalLabel.setText(Double.toString(Math.round(progress.doubleValue()) * 24));
-//
-//            totalLabel.setText(Integer.toString((int)Math.round(progress.doubleValue())));
-//        } else {
-//            progressBar.setProgress(24);
-//            totalLabel.setText("Your screen time is 24 hours");
-//        }
-//        Platform.runLater(() -> {
-//            progressBar.setProgress(value);
-//        });
-//        try {
-//            Thread.sleep(1000);
-//        }
-//        catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
 
     }
 
@@ -447,12 +564,14 @@ public class timeController implements Initializable {
 
         return lines;
     }
+
     public void todo() {
+        System.out.println("Opening todo input dialog...");
         TextInputDialog dialog = new TextInputDialog("Enter your input here");
 
-        dialog.setTitle("Input Dialog");
-        dialog.setHeaderText("Please enter your input:");
-        dialog.setContentText("Input:");
+        dialog.setTitle("Add Todo Item");
+        dialog.setHeaderText("Please enter your todo item:");
+        dialog.setContentText("Todo:");
 
         DialogPane dialogPane = dialog.getDialogPane();
         dialogPane.setGraphic(null);
@@ -463,23 +582,60 @@ public class timeController implements Initializable {
         dialogPane.getStylesheets().add(getClass().getResource("dialog-styles.css").toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
 
+
+        Label note = new Label("ADD A NEW TODO ITEM IN THE LIST");
+        note.setStyle("-fx-text-fill: #888888; -fx-font-size: 11px;");
+        VBox content = new VBox(10);
+        content.getChildren().addAll(dialogPane.getContent(), note);
+        dialogPane.setContent(content);
+
         dialog.showAndWait().ifPresent(input -> {
-            addTodoItem(input);
+            if (input != null && !input.trim().isEmpty()) {
+                System.out.println("Adding manual todo item: " + input.trim());
+                addTodoItem(input.trim(), false);
+            }
         });
     }
 
-    private void addTodoItem(String input) {
+    private void addTodoItem(String input, boolean isScheduleTopic) {
+        System.out.println("Adding todo item: " + input + " (Schedule topic: " + isScheduleTopic + ")");
+
+        for (Node node : todoVBox.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hBox = (HBox) node;
+                for (Node child : hBox.getChildren()) {
+                    if (child instanceof Label && ((Label) child).getText().equals(input)) {
+                        System.out.println("already exists: " + input);
+                        return;
+                    }
+                }
+            }
+        }
+
         HBox todoHBox = new HBox(15);
 
-        System.out.println("User input: " + input);
         Label todoL = new Label(input);
-        todoL.setStyle("-fx-text-fill: white; -fx-font-family: 'OCR A Extended'; -fx-padding: 3; -fx-font-size: 20px;");
+        String baseStyle = "-fx-text-fill: white; -fx-font-family: 'OCR A Extended'; -fx-padding: 3; -fx-font-size: 20px;";
+
+        if (isScheduleTopic) {
+            todoL.setStyle(baseStyle + "; -fx-background-color: #2A3F5F; -fx-background-radius: 5;");
+        } else {
+            todoL.setStyle(baseStyle);
+        }
+
         CheckBox todoC = new CheckBox();
+        todoC.setStyle("-fx-text-fill: white;");
 
         todoC.setOnAction(e -> {
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
                 todoVBox.getChildren().remove(todoHBox);
-                saveTodoItems();
+                if (isScheduleTopic) {
+                    completedScheduleTopics.add(input);
+                    saveCompletedTasks();
+                } else {
+                    saveTodoItems();
+                }
+                System.out.println("Removed todo item: " + input);
             }));
             timeline.play();
         });
@@ -487,25 +643,42 @@ public class timeController implements Initializable {
         todoHBox.getChildren().addAll(todoC, todoL);
         todoVBox.getChildren().add(todoHBox);
 
-        saveTodoItems();
+        if (!isScheduleTopic) {
+            saveTodoItems();
+        }
+
+        System.out.println("Successfully added todo item: " + input);
+    }
+    private void saveCompletedTasks() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(COMPLETED_TASKS_FILE_PATH))) {
+            for (String task : completedScheduleTopics) {
+                writer.write(task);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveTodoItems() {
-        List<String> todoItems = new ArrayList<>();
+        List<String> manualTodoItems = new ArrayList<>();
+
         for (Node node : todoVBox.getChildren()) {
             if (node instanceof HBox) {
                 HBox hBox = (HBox) node;
                 for (Node child : hBox.getChildren()) {
                     if (child instanceof Label) {
                         Label label = (Label) child;
-                        todoItems.add(label.getText());
+                        if (!label.getStyle().contains("-fx-background-color: #2A3F5F")) {
+                            manualTodoItems.add(label.getText());
+                        }
                     }
                 }
             }
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(TODO_FILE_PATH))) {
-            for (String item : todoItems) {
+            for (String item : manualTodoItems) {
                 writer.write(item);
                 writer.newLine();
             }
@@ -515,20 +688,63 @@ public class timeController implements Initializable {
     }
 
     private void loadTodoItems() {
+        System.out.println("Loading todo items...");
+
+        Platform.runLater(() -> {
+            todoVBox.getChildren().clear();
+            System.out.println("Cleared existing todo items");
+        });
+
+        completedScheduleTopics.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(COMPLETED_TASKS_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                completedScheduleTopics.add(line);
+            }
+            System.out.println("Loaded " + completedScheduleTopics.size() + " completed tasks from file");
+        } catch (IOException e) {
+            System.err.println("Error reading completed tasks file: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         List<String> todoItems = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(TODO_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 todoItems.add(line);
             }
+            System.out.println("Loaded " + todoItems.size() + " manual todo items from file");
         } catch (IOException e) {
+            System.err.println("Error reading todo file: " + e.getMessage());
             e.printStackTrace();
         }
 
         for (String item : todoItems) {
-            addTodoItem(item);
+            if (!completedScheduleTopics.contains(item)) {
+                final String todoItem = item;
+                Platform.runLater(() -> {
+                    addTodoItem(todoItem, false);
+                    System.out.println("Added manual todo item: " + todoItem);
+                });
+            }
+        }
+
+        scheduleManager sManager = new scheduleManager();
+        List<String> currentTopics = sManager.getCurrentTopics(userID);
+
+        System.out.println("Fetched " + currentTopics.size() + " topics from schedule");
+
+        for (String topic : currentTopics) {
+            if (!completedScheduleTopics.contains(topic)) {
+                final String scheduleTopic = topic;
+                Platform.runLater(() -> {
+                    addTodoItem(scheduleTopic, true);
+                    System.out.println("Added schedule topic: " + scheduleTopic);
+                });
+            }
         }
     }
+
     private void setupTableView() {
         submissionDateCol.setCellValueFactory(new PropertyValueFactory<>("submissionDate"));
         subjectCodeCol.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
@@ -580,6 +796,8 @@ public class timeController implements Initializable {
             }
         }
 
+
+        assignmentTable.getItems().clear();
         assignmentTable.setItems(data);
     }
 
@@ -595,15 +813,8 @@ public class timeController implements Initializable {
         newStage.show();
     }
 
-    public void scheduleDisplay(){
-        scheduleController schedule = new scheduleController();
-        String sTitle = schedule.getTitle();
-        String sTimeFrom = schedule.getTimeFrom();
-        String sTimeTo = schedule.getTimeTo();
-        String sDateFrom = schedule.getDateFrom();
-        String sDateTo = schedule.getDateTo();
 
-    }
+
 
 
 }
