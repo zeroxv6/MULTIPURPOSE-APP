@@ -1,164 +1,8 @@
-/*.ap{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*    -fx-border-radius: 20px;*/
-/*    -fx-border-color: #1A2238;*/
-/*    -fx-background-radius: 20px;*/
-/*}*/
 
-/*#bg{*/
-/*    -fx-background-color: #050e2d;*/
-/*}*/
-
-/*!*#progressBar{*!*/
-/*!*    -fx-accent: #bba137;*!*/
-/*!*    -fx-background-color: #1f2324;*!*/
-/*!*    !*-fx-border-color: #313338;*!*!*/
-/*!*    -fx-border-color: #1f2324;*!*/
-/*!*    -fx-border-radius: 1px;*!*/
-/*!*}*!*/
-
-/*#chatInput{*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-text-fill: white;*/
-/*    !*-fx-border-color: #5b5e67;*!*/
-/*    -fx-border-color: #bba137;*/
-/*    -fx-border-radius: 20;*/
-/*}*/
-/*#chatSend{*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-text-fill: white;*/
-/*    -fx-border-color: #bba137;*/
-/*    -fx-border-radius: 20;*/
-/*    !*-fx-border-color: black;*!*/
-/*}*/
-
-/*#chatVBox{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*    !*-fx-border-color: black;*!*/
-/*    !*-fx-border-radius: 2px;*!*/
-/*    -fx-text-fill: white;*/
-/*}*/
-/*#chatScroll{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-/*#scrollActive{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*#activePane{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*    -fx-wrap-text: true;*/
-/*}*/
-
-/*#agnVBox{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*#agnScroll{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*#agnBg{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*.rectHead{*/
-/*    -fx-background-color: black;*/
-/*    !*-fx-font-family: "Mauline", sans-serif;*!*/
-/*    -fx-font-family: "OCR A Extended", Regular;*/
-/*    -fx-font-size: 30px;*/
-/*    -fx-background-radius: 20px;*/
-/*    !*-fx-text-fill: white;*!*/
-/*    -fx-text-fill: white;*/
-/*}*/
-
-/*.buttons{*/
-/*    -fx-font-family: "OCR A Extended", Regular;*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-text-fill: #D9DCDF;*/
-/*    -fx-border-color: #bba137;*/
-/*    -fx-border-radius: 18px;*/
-/*    -fx-background-radius: 18px;*/
-/*}*/
-
-/*#todoVBox{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*#todoScroll{*/
-/*    !*-fx-background-color: #0A143C;*!*/
-/*    -fx-background-color: linear-gradient(#0A143C, #1A2238);*/
-/*}*/
-
-/*!* styles.css *!*/
-
-/*!* Increase the size of the checkbox *!*/
-/*.check-box .box {*/
-/*    -fx-min-width: 22px;*/
-/*    -fx-min-height: 22px;*/
-/*    -fx-max-width: 22px;*/
-/*    -fx-max-height: 22px;*/
-/*    -fx-background-color: #ffffff, #4a90e2;*/
-/*    -fx-background-insets: 0, 1;*/
-/*    -fx-background-radius: 5, 5;*/
-/*    -fx-padding: 3;*/
-/*}*/
-
-/*.check-box:selected .box .mark {*/
-/*    -fx-background-color: #4a90e2;*/
-/*    -fx-border-color: #ffffff;*/
-/*    -fx-border-width: 2px;*/
-/*    -fx-border-radius: 2px;*/
-/*    -fx-padding: 2;*/
-/*}*/
-
-/*.check-box .box .mark {*/
-/*    -fx-min-width: 15px;*/
-/*    -fx-min-height: 15px;*/
-/*    -fx-max-width: 15px;*/
-/*    -fx-max-height: 15px;*/
-/*}*/
-
-/*.scroll-bar:vertical {*/
-/*    -fx-pref-width: 8px; !* Set the width of the vertical scrollbar *!*/
-/*    -fx-background-color: transparent; !* Background color of the scrollbar track *!*/
-/*}*/
-
-/*!* Customize the horizontal scrollbar *!*/
-/*.scroll-bar:horizontal {*/
-/*    -fx-pref-height: 8px; !* Set the height of the horizontal scrollbar *!*/
-/*    -fx-background-color: transparent; !* Background color of the scrollbar track *!*/
-/*}*/
-
-/*!* Customize the scrollbar thumb (the draggable part) *!*/
-/*.scroll-bar .thumb {*/
-/*    -fx-background-color: #000000; !* Change the color of the scrollbar thumb *!*/
-/*    -fx-background-radius: 2px; !* Make the corners of the scrollbar thumb rounded *!*/
-
-/*}*/
-
-/*!* Customize the scrollbar track (the background of the scrollbar) *!*/
-/*.scroll-bar .track {*/
-/*    -fx-background-color: #3B82F6; !* Change the color of the scrollbar track *!*/
-/*    -fx-background-radius: 4px; !* Make the corners of the scrollbar track rounded *!*/
-/*}*/
-
-/* Main background color */
 #bg {
     -fx-background-color: #050e2d;
 }
 
-/* Styles for AnchorPane elements */
 .ap {
     -fx-background-color: linear-gradient(#0A143C, #1A2238);
     -fx-border-radius: 20px;
@@ -166,14 +10,13 @@
     -fx-background-radius: 20px;
 }
 
-/* ProgressBar styles */
 #progressBar {
     -fx-accent: #15d9a6;
     -fx-background-color: transparent;
 
 }
 .progress-bar .track {
-    -fx-background-color: transparent; /* Change this to the desired unfilled color */
+    -fx-background-color: transparent;
 
 }
 #totalLabel {
@@ -187,7 +30,6 @@
     -fx-background-color: black;
 }
 
-/* Styles for chat input and send button */
 #chatInput, #chatSend {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -195,12 +37,10 @@
     -fx-border-radius: 20;
 }
 
-/* Styles for chat VBox and ScrollPane */
 #chatVBox, #chatScroll, #scrollActive, #activePane, #agnVBox, #agnScroll, #agnBg, #todoVBox, #todoScroll {
     -fx-background-color: linear-gradient(#0A143C, #1A2238);
 }
 
-/* Styles for headers */
 .rectHead {
     -fx-background-color: black;
     -fx-font-family: "OCR A Extended", Regular;
@@ -209,7 +49,6 @@
     -fx-text-fill: white;
 }
 
-/* Styles for buttons */
 .buttons {
     -fx-font-family: "OCR A Extended", Regular;
     -fx-background-color: transparent;
@@ -219,39 +58,34 @@
     -fx-background-radius: 18px;
 }
 
-/* Styles for checkboxes */
-/* Customize the checkbox box */
 .check-box .box {
     -fx-min-width: 22px;
     -fx-min-height: 22px;
     -fx-max-width: 22px;
     -fx-max-height: 22px;
-    -fx-background-color: transparent; /* No background color */
-    -fx-border-color: #C0C0C0; /* Border color */
-    -fx-border-width: 2px; /* Border width */
-    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-color: transparent;
+    -fx-border-color: #C0C0C0;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5;
     -fx-padding: 3;
 }
 
-/* Customize the tick mark when the checkbox is selected */
 .check-box:selected .box .mark {
-    -fx-background-color: #C0C0C0; /* Tick mark color */
-    -fx-border-color: #C0C0C0; /* Border color of the tick mark */
-    -fx-border-width: 2px; /* Border width of the tick mark */
-    -fx-border-radius: 2px; /* Rounded corners */
+    -fx-background-color: #C0C0C0;
+    -fx-border-color: #C0C0C0;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
     -fx-padding: 2;
 }
 
-/* Customize the tick mark size */
 .check-box .box .mark {
     -fx-min-width: 15px;
     -fx-min-height: 15px;
     -fx-max-width: 15px;
     -fx-max-height: 15px;
-    -fx-background-color: transparent; /* No background color */
+    -fx-background-color: transparent;
 }
 
-/* Styles for scrollbars */
 .scroll-bar:vertical {
     -fx-pref-width: 12px;
     -fx-background-color: transparent;
@@ -279,7 +113,6 @@
     -fx-background-color: transparent;
 }
 
-/* Styles for ScrollPane viewport */
 ScrollPane .viewport {
     -fx-background-color: transparent;
 }
@@ -315,7 +148,6 @@ ScrollPane .viewport {
     -fx-text-fill: white;
 }
 
-/* Basic Table Styling */
 .table-view {
     -fx-background-color: #1A2238;
     -fx-text-fill: white;
@@ -323,7 +155,6 @@ ScrollPane .viewport {
     -fx-font-size: 14px;
 }
 
-/* Table Header Styling */
 .table-view .column-header {
     -fx-background-color: #0A143C;
     -fx-text-fill: white;
@@ -335,36 +166,30 @@ ScrollPane .viewport {
     -fx-text-fill: white;
 }
 
-/* Table Cell Styling */
 .table-view .table-cell {
     -fx-text-fill: white;
     -fx-alignment: center;
     -fx-padding: 5px;
 }
 
-/* Table Row Styling */
 .table-row-cell {
     -fx-background-color: #1A2238;
     -fx-border-color: #313338;
     -fx-border-width: 0.5px;
 }
 
-/* Alternate Row Colors */
 .table-row-cell:odd {
     -fx-background-color: #232838;
 }
 
-/* Row Hover Effect */
 .table-row-cell:hover {
     -fx-background-color: #313855;
 }
 
-/* Selected Row */
 .table-row-cell:selected {
     -fx-background-color: #394264;
 }
 
-/* Action Button in Table */
 .table-cell .button {
     -fx-background-color: #394264;
     -fx-text-fill: white;
@@ -377,7 +202,6 @@ ScrollPane .viewport {
     -fx-background-color: #4A5785;
 }
 
-/* Scroll Bar Styling */
 .table-view .scroll-bar:vertical,
 .table-view .scroll-bar:horizontal {
     -fx-background-color: #1A2238;
@@ -393,7 +217,15 @@ ScrollPane .viewport {
     -fx-background-color: #4A5785;
 }
 
-/* Empty Table Message */
 .table-view .placeholder .label {
     -fx-text-fill: white;
 }
+
+#schScroll{
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER-LEFT;
+}
+
